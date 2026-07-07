@@ -25,6 +25,7 @@
         <li><a href="contatti.html">Contatti</a></li>
         <li class="nav-cta"><a class="btn btn-primary" href="contatti.html">Richiedi preventivo</a></li>
       </ul>
+      <button class="theme-switch" id="theme-toggle" role="switch" aria-checked="false" aria-label="Cambia tema chiaro/scuro"><span class="ts-stars"></span><span class="ts-sun"></span><span class="ts-moon"></span></button>
       <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -32,11 +33,26 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-glow"></div>
   <div class="container hero-grid">
     <div class="reveal">
       <span class="eyebrow">Siti web per piccole attività</span>
       <h1>Il tuo <span>biglietto da visita</span> online, fatto bene.</h1>
       <p class="lead">Aiutiamo ristoranti, negozi e attività locali ad avere un sito web professionale, veloce e pronto a portare nuovi clienti. Curato in ogni dettaglio, senza pensieri tecnici.</p>
+      <div class="preview-tool reveal">
+        <label>✨ Provalo: scrivi il nome della tua attività e guarda a destra</label>
+        <div class="preview-inputs">
+          <input id="biz-name" type="text" placeholder="Es. Trattoria da Mario" maxlength="28" autocomplete="off">
+          <select id="biz-type" aria-label="Tipo di attività">
+            <option value="ristorante">Ristorante</option>
+            <option value="bar">Bar / Caffè</option>
+            <option value="negozio">Negozio</option>
+            <option value="parrucchiere">Parrucchiere</option>
+            <option value="panetteria">Panetteria</option>
+            <option value="artigiano">Artigiano</option>
+          </select>
+        </div>
+      </div>
       <div class="hero-cta">
         <a class="btn btn-primary btn-lg" href="portfolio.html">Guarda il portfolio</a>
         <a class="btn btn-ghost btn-lg" href="contatti.html">Parliamone →</a>
@@ -49,13 +65,14 @@
     </div>
     <div class="reveal">
       <div class="mockup">
-        <div class="mockup-bar"><i></i><i></i><i></i><span class="mockup-url">trattoria-danonna.it</span></div>
+        <div class="mockup-bar"><i></i><i></i><i></i><span class="mockup-url" id="mock-url">la-tua-attivita.it</span></div>
         <div class="mockup-body">
-          <span class="mock-tag">Trattoria · dal 1978</span>
-          <div class="mock-h">Cucina di casa,<br>nel cuore del paese</div>
+          <div class="mock-strip" id="mock-strip"></div>
+          <span class="mock-tag" id="mock-tag">Ristorante · Cucina di casa</span>
+          <div class="mock-h" id="mock-h">La tua attività</div>
           <div class="mock-line"></div>
           <div class="mock-line short"></div>
-          <a class="mock-btn">Prenota un tavolo</a>
+          <a class="mock-btn" id="mock-btn">Prenota ora</a>
         </div>
       </div>
     </div>

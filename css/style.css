@@ -24,7 +24,24 @@
   --maxw: 1140px;
   --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --header-bg: rgba(250,247,242,.82);
 }
+
+/* ---------- Tema scuro ---------- */
+html.dark {
+  --ink:        #f0eae1;
+  --ink-soft:   #a89e91;
+  --paper:      #16140f;
+  --paper-2:    #201d16;
+  --card:       #211d16;
+  --line:       #37312a;
+  --accent:     #e5764d;
+  --accent-dk:  #c95e37;
+  --accent-soft:rgba(229,118,77,.16);
+  --dark:       #0f0d0a;
+  --header-bg:  rgba(22,20,15,.82);
+}
+body { transition: background .3s ease, color .3s ease; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -81,14 +98,14 @@ img { max-width: 100%; display: block; }
 /* ---------- Header / Nav ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(250,247,242,.82);
+  background: var(--header-bg);
   backdrop-filter: saturate(160%) blur(12px);
   border-bottom: 1px solid transparent;
   transition: border-color .2s ease, box-shadow .2s ease;
 }
 .site-header.scrolled { border-color: var(--line); box-shadow: 0 6px 24px -18px rgba(0,0,0,.3); }
-.nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-.brand { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-weight: 600; font-size: 1.25rem; letter-spacing: -.02em; }
+.nav { display: flex; align-items: center; gap: 10px; height: 72px; }
+.brand { display: flex; align-items: center; gap: 10px; margin-right: auto; font-family: var(--serif); font-weight: 600; font-size: 1.25rem; letter-spacing: -.02em; }
 .brand .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); display: inline-block; }
 .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
 .nav-links a { font-size: .96rem; font-weight: 500; color: var(--ink-soft); position: relative; transition: color .18s; }
@@ -267,6 +284,12 @@ img { max-width: 100%; display: block; }
     transition: opacity .2s, transform .2s;
   }
   .nav-links a { padding: 10px 0; width: 100%; }
+  /* Nel menu mobile la voce attiva è evidenziata col colore, non con la linea */
+  .nav-links a.active::after { display: none; }
+  .nav-links a.active { color: var(--accent); font-weight: 600; }
+  /* Pulsante CTA: largo e testo centrato */
+  .nav-links .nav-cta { width: 100%; margin-top: 10px; }
+  .nav-links .nav-cta .btn { width: 100%; justify-content: center; padding: 14px 22px; }
   .nav.open .nav-links { opacity: 1; transform: none; pointer-events: auto; }
   .nav.open .nav-toggle span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
   .nav.open .nav-toggle span:nth-child(2){ opacity: 0; }
@@ -275,4 +298,97 @@ img { max-width: 100%; display: block; }
 @media (max-width: 560px) {
   .foot-grid { grid-template-columns: 1fr; }
   .hero-trust { gap: 18px; }
+}
+
+/* ============================================================
+   Aggiunte: tema scuro, anteprima live, glow cursore
+   ============================================================ */
+
+/* Switch tema giorno/notte con sole che tramonta e luna che sorge */
+.theme-switch {
+  flex: none; position: relative; width: 62px; height: 30px; padding: 0;
+  border-radius: 100px; border: 1.5px solid rgba(0,0,0,.08); cursor: pointer;
+  overflow: hidden; background: linear-gradient(160deg, #8ecae6, #bfe3fb);
+  transition: background .6s ease, border-color .3s ease;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.12);
+}
+.theme-switch:hover { border-color: rgba(0,0,0,.16); }
+html.dark .theme-switch { background: linear-gradient(160deg, #1b2a4a, #0e1626); border-color: rgba(255,255,255,.14); }
+
+/* Sole */
+.ts-sun {
+  position: absolute; left: 8px; top: 6px; width: 18px; height: 18px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffe08a, #ffc23c);
+  box-shadow: 0 0 10px 2px rgba(255,196,60,.7);
+  transition: top .6s cubic-bezier(.5,-0.4,.5,1.4), opacity .5s ease;
+}
+html.dark .ts-sun { top: 34px; opacity: 0; }   /* tramonta */
+
+/* Luna (mezzaluna disegnata con ombra interna: nessun disco sovrapposto) */
+.ts-moon {
+  position: absolute; left: 36px; top: 34px; width: 18px; height: 18px; border-radius: 50%;
+  background: transparent;
+  box-shadow: inset -5px -2px 0 0 #eef1f6;
+  filter: drop-shadow(0 0 2px rgba(238,241,246,.45));
+  opacity: 0;
+  transition: top .6s cubic-bezier(.5,-0.4,.5,1.4), opacity .5s ease;
+}
+html.dark .ts-moon { top: 6px; opacity: 1; }    /* sorge */
+
+/* Stelle (solo notte) */
+.ts-stars {
+  position: absolute; left: 11px; top: 9px; width: 2px; height: 2px; border-radius: 50%;
+  background: #fff; opacity: 0; transition: opacity .6s ease .1s;
+  box-shadow: 7px 5px 0 -0.5px #fff, -2px 10px 0 -0.5px rgba(255,255,255,.85), 13px -2px 0 -0.5px rgba(255,255,255,.75), 4px 14px 0 -0.5px rgba(255,255,255,.7);
+}
+html.dark .ts-stars { opacity: 1; }
+
+/* Il mockup resta sempre "chiaro": è l'anteprima di un sito cliente */
+.mockup { background: #fff; }
+.mockup-bar { background: #f2ede4; border-bottom-color: #e6ddd0; }
+.mockup-url { background: #fff; color: #8a8377; transition: all .3s ease; }
+.mock-h { color: #1c1a17; }
+.mock-line { background: #efe9e0; }
+.mock-tag, .mock-btn { transition: all .3s ease; }
+.mock-strip {
+  height: 6px; border-radius: 6px; margin-bottom: 16px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-dk));
+  transition: background .3s ease;
+}
+/* Testo del portfolio sempre leggibile (finti siti su fondo bianco) */
+.folio-visual .fake-hero .t { color: #1c1a17; }
+.folio-visual .fake-hero .s { color: #6a6459; }
+
+/* Strumento anteprima live */
+.preview-tool {
+  margin: 26px 0 4px; padding: 16px 18px; max-width: 460px;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.preview-tool label { display: block; font-size: .82rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 10px; }
+.preview-inputs { display: flex; gap: 10px; }
+.preview-inputs input { flex: 1; min-width: 0; }
+.preview-inputs input, .preview-inputs select {
+  padding: 11px 13px; border: 1.5px solid var(--line); border-radius: 10px;
+  font-family: var(--font); font-size: .92rem; background: var(--paper); color: var(--ink); transition: border-color .18s;
+}
+.preview-inputs select { cursor: pointer; }
+.preview-inputs input:focus, .preview-inputs select:focus { outline: none; border-color: var(--accent); }
+
+/* Glow che segue il cursore nell'hero */
+.hero { position: relative; overflow: hidden; }
+.hero .container { position: relative; z-index: 1; }
+.hero-glow {
+  position: absolute; left: 50%; top: 30%; width: 520px; height: 520px;
+  border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 0; opacity: 0;
+  background: radial-gradient(circle, rgba(217,96,59,.18), rgba(217,96,59,0) 70%);
+  transition: opacity .4s ease;
+}
+html.dark .hero-glow { background: radial-gradient(circle, rgba(229,118,77,.22), rgba(229,118,77,0) 70%); }
+@media (max-width: 900px) { .preview-tool { max-width: none; } }
+
+/* Switch nel menu: allineamento verticale (desktop) e spaziatura (mobile) */
+.nav-switch { display: flex; align-items: center; }
+@media (max-width: 900px) {
+  .nav-links .nav-switch { margin: 10px 0 2px; }
 }
