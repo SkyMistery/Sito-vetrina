@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contatti — Studio Vetrina</title>
+<meta name="description" content="Richiedi un preventivo gratuito per il sito web della tua attività. Ti rispondiamo entro 24 ore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav">
+      <a class="brand" href="index.html"><span class="dot"></span> Studio Vetrina</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="servizi.html">Servizi</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="chi-siamo.html">Chi siamo</a></li>
+        <li><a href="contatti.html" class="active">Contatti</a></li>
+        <li class="nav-cta"><a class="btn btn-primary" href="#form">Richiedi preventivo</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container reveal">
+    <span class="eyebrow">Contatti</span>
+    <h1>Parliamo del tuo progetto</h1>
+    <p class="lead">Raccontaci la tua attività e cosa vorresti ottenere. Ti rispondiamo entro 24 ore con un preventivo gratuito e senza impegno.</p>
+  </div>
+</section>
+
+<section class="section-sm" id="form">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- FORM -->
+      <div class="reveal">
+        <form id="contact-form">
+          <div class="field"><label for="nome">Nome e cognome</label><input id="nome" type="text" placeholder="Mario Rossi" required></div>
+          <div class="field"><label for="attivita">Nome dell'attività</label><input id="attivita" type="text" placeholder="Es. Trattoria da Nonna"></div>
+          <div class="grid grid-2" style="gap:18px;">
+            <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="tu@esempio.it" required></div>
+            <div class="field"><label for="tel">Telefono</label><input id="tel" type="tel" placeholder="+39 ..."></div>
+          </div>
+          <div class="field"><label for="tipo">Tipo di attività</label>
+            <select id="tipo">
+              <option>Ristorante / Pizzeria</option>
+              <option>Bar / Caffetteria</option>
+              <option>Negozio</option>
+              <option>Parrucchiere / Estetica</option>
+              <option>Panetteria / Pasticceria</option>
+              <option>Artigiano</option>
+              <option>Altro</option>
+            </select>
+          </div>
+          <div class="field"><label for="msg">Raccontaci la tua idea</label><textarea id="msg" placeholder="Cosa vorresti dal tuo sito? Hai già un logo, foto, un dominio?"></textarea></div>
+          <button class="btn btn-primary btn-lg" type="submit" style="width:100%; justify-content:center;">Invia richiesta</button>
+          <p class="form-note">Inviando accetti di essere ricontattato. Nessuno spam, promesso.</p>
+          <p class="form-ok" style="display:none; margin-top:14px; padding:14px 16px; background:var(--accent-soft); color:var(--accent-dk); border-radius:10px; font-weight:600;">✓ Grazie! Richiesta ricevuta (demo). Collegheremo il modulo a un'email reale prima della pubblicazione.</p>
+        </form>
+      </div>
+
+      <!-- INFO -->
+      <div class="contact-info reveal">
+        <h3 style="font-family:var(--serif); margin-bottom:8px;">Preferisci scrivere direttamente?</h3>
+        <p style="margin-bottom:10px;">Siamo disponibili e rispondiamo veloci.</p>
+        <div class="row"><div class="ic">✉️</div><div><b>Email</b><span>info@studiovetrina.it</span></div></div>
+        <div class="row"><div class="ic">📞</div><div><b>Telefono</b><span>+39 000 000 0000</span></div></div>
+        <div class="row"><div class="ic">💬</div><div><b>WhatsApp</b><span>Scrivici per una risposta rapida</span></div></div>
+        <div class="row"><div class="ic">📍</div><div><b>Zona</b><span>[Città / provincia da inserire]</span></div></div>
+        <div class="row" style="border-bottom:none;"><div class="ic">🕒</div><div><b>Orari</b><span>Lun–Ven 9:00–18:00</span></div></div>
+
+        <div style="margin-top:26px; padding:22px; background:var(--accent-soft); border-radius:var(--radius);">
+          <b style="font-family:var(--serif); font-size:1.1rem;">Primo confronto gratuito</b>
+          <p style="margin-top:6px; color:var(--ink-soft);">Nessun costo, nessun impegno. Capiamo insieme se possiamo esserti utili.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div><div class="brand"><span class="dot"></span> Studio Vetrina</div><p>Siti web professionali per ristoranti, negozi e piccole attività.</p></div>
+      <div><h4>Menu</h4><ul><li><a href="index.html">Home</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="chi-siamo.html">Chi siamo</a></li></ul></div>
+      <div><h4>Servizi</h4><ul><li><a href="servizi.html">Siti vetrina</a></li><li><a href="servizi.html">SEO locale</a></li><li><a href="servizi.html">Menù digitali</a></li><li><a href="servizi.html">Assistenza</a></li></ul></div>
+      <div><h4>Contatti</h4><ul><li><a href="mailto:info@studiovetrina.it">info@studiovetrina.it</a></li><li><a href="tel:+390000000000">+39 000 000 0000</a></li><li><a href="contatti.html">Richiedi preventivo</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Studio Vetrina — Nome provvisorio. P.IVA da inserire.</span><span>Fatto con cura, in Italia 🇮🇹</span></div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
