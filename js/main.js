@@ -1,4 +1,4 @@
-/* Studio Vetrina — interazioni base */
+/* Studio Vetrina — interazioni base (il tema è gestito inline nell'HTML) */
 document.addEventListener("DOMContentLoaded", () => {
 
   // Header shadow on scroll
@@ -23,44 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.12 });
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-  // ---- Tema chiaro/scuro (switch giorno/notte) ----
-  const root = document.documentElement;
-  const tbtn = document.querySelector("#theme-toggle");
-  const prefersDark = () => window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const readSaved = () => { try { return localStorage.getItem("theme"); } catch (e) { return null; } };
-  // All'avvio: se l'utente ha già scelto uso la sua scelta, altrimenti seguo l'impostazione del telefono
-  const applyInitial = () => {
-    const saved = readSaved();
-    if (saved === "dark") root.classList.add("dark");
-    else if (saved === "light") root.classList.remove("dark");
-    else root.classList.toggle("dark", prefersDark());
-  };
-  applyInitial();
-  const syncSwitch = () => { if (tbtn) tbtn.setAttribute("aria-checked", root.classList.contains("dark") ? "true" : "false"); };
-  syncSwitch();
-  if (tbtn) tbtn.addEventListener("click", () => {
-    root.classList.toggle("dark");
-    try { localStorage.setItem("theme", root.classList.contains("dark") ? "dark" : "light"); } catch (e) {}
-    syncSwitch();
-  });
-  // Se cambia il tema di sistema e l'utente non ha ancora scelto manualmente, mi adeguo
-  if (window.matchMedia) {
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (ev) => {
-      if (!readSaved()) { root.classList.toggle("dark", ev.matches); syncSwitch(); }
-    });
-  }
-
   // ---- Anteprima live personalizzata (hero) ----
   const bizName = document.querySelector("#biz-name");
   const bizType = document.querySelector("#biz-type");
   if (bizName && bizType) {
     const types = {
-      ristorante:   { c1:"#7a2e1e", c2:"#c2603e", tag:"Ristorante · Cucina di casa",  sub:"Prenota il tuo tavolo",       btn:"Prenota ora" },
-      bar:          { c1:"#1f3a56", c2:"#3f7bb0", tag:"Bar · Caffetteria",             sub:"Colazioni & aperitivi",       btn:"Scopri" },
-      negozio:      { c1:"#274b3f", c2:"#4c8a6f", tag:"Negozio",                            sub:"Scopri i nostri prodotti",    btn:"Vieni a trovarci" },
-      parrucchiere: { c1:"#2b2540", c2:"#6c5ba0", tag:"Parrucchiere · Hair stylist",   sub:"Prenota l'appuntamento",      btn:"Prenota" },
-      panetteria:   { c1:"#5a3b17", c2:"#c99a4e", tag:"Panetteria · Forno",            sub:"Pane e dolci freschi",        btn:"Scopri" },
-      artigiano:    { c1:"#3a2c22", c2:"#a86b3c", tag:"Artigiano · Bottega",           sub:"Al tuo servizio, ogni giorno",btn:"Contattaci" }
+      ristorante:   { c1:"#7a2e1e", c2:"#c2603e", tag:"Ristorante · Cucina di casa", sub:"Prenota il tuo tavolo",        btn:"Prenota ora" },
+      bar:          { c1:"#1f3a56", c2:"#3f7bb0", tag:"Bar · Caffetteria",            sub:"Colazioni & aperitivi",        btn:"Scopri" },
+      negozio:      { c1:"#274b3f", c2:"#4c8a6f", tag:"Negozio",                           sub:"Scopri i nostri prodotti",     btn:"Vieni a trovarci" },
+      parrucchiere: { c1:"#2b2540", c2:"#6c5ba0", tag:"Parrucchiere · Hair stylist",  sub:"Prenota l'appuntamento",       btn:"Prenota" },
+      panetteria:   { c1:"#5a3b17", c2:"#c99a4e", tag:"Panetteria · Forno",           sub:"Pane e dolci freschi",         btn:"Scopri" },
+      artigiano:    { c1:"#3a2c22", c2:"#a86b3c", tag:"Artigiano · Bottega",          sub:"Al tuo servizio, ogni giorno", btn:"Contattaci" }
     };
     const url  = document.querySelector("#mock-url");
     const tag  = document.querySelector("#mock-tag");
@@ -96,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     hero.addEventListener("mouseleave", () => { glow.style.opacity = "0"; });
   }
 
-  // ---- Contact form (demo — nessun backend collegato) ----
+  // ---- Contact form (demo) ----
   const form = document.querySelector("#contact-form");
   if (form) {
     form.addEventListener("submit", (e) => {
