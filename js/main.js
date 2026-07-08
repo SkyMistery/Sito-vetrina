@@ -26,7 +26,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // ---- Tema chiaro/scuro (switch giorno/notte) ----
   const root = document.documentElement;
   const tbtn = document.querySelector("#theme-toggle");
-  try { if (localStorage.getItem("theme") === "dark") root.classList.add("dark"); } catch (e) {}
+  const prefersDark = () => window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const readSaved = () => { try { return localStorage.getItem("theme"); } catch (e) { return null; } };
+  // All'avvio: se l'utente ha già scelto uso la sua scelta, altrimenti seguo l'impostazione del telefono
+  const applyInitial = () => {
+    const saved = readSaved();
+    if (saved === "dark") root.classList.add("dark");
+    else if (saved === "light") root.classList.remove("dark");
+    else root.classList.toggle("dark", prefersDark());
+  };
+  applyInitial();
   const syncSwitch = () => { if (tbtn) tbtn.setAttribute("aria-checked", root.classList.contains("dark") ? "true" : "false"); };
   syncSwitch();
   if (tbtn) tbtn.addEventListener("click", () => {
@@ -34,6 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
     try { localStorage.setItem("theme", root.classList.contains("dark") ? "dark" : "light"); } catch (e) {}
     syncSwitch();
   });
+  // Se cambia il tema di sistema e l'utente non ha ancora scelto manualmente, mi adeguo
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (ev) => {
+      if (!readSaved()) { root.classList.toggle("dark", ev.matches); syncSwitch(); }
+    });
+  }
 
   // ---- Anteprima live personalizzata (hero) ----
   const bizName = document.querySelector("#biz-name");
