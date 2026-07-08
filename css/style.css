@@ -268,8 +268,8 @@ img { max-width: 100%; display: block; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
-  .hero-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-  .grid-3, .grid-4, .price-grid, .folio { grid-template-columns: 1fr; }
+  .hero-grid, .contact-grid { grid-template-columns: minmax(0,1fr); gap: 40px; }
+  .grid-3, .grid-4, .price-grid, .folio { grid-template-columns: minmax(0,1fr); }
   .grid-2 { grid-template-columns: 1fr; }
   .foot-grid { grid-template-columns: 1fr 1fr; }
   .section { padding: 68px 0; }
@@ -399,4 +399,13 @@ html { overflow-x: clip; }               /* blocca scroll orizzontale senza romp
   .mockup { transform: none; }           /* la rotazione sforava a sinistra su schermi piccoli */
   .hero-glow { display: none; }          /* alone 520px inutile su mobile (effetto solo desktop) */
   .hero { padding: 64px 0 56px; }
+}
+
+/* Fix definitivo overflow hero su mobile: elementi che possono restringersi + wrap */
+@media (max-width: 900px) {
+  .hero-grid > *, .hero .reveal { min-width: 0; }
+  .hero h1, .hero .lead, .preview-tool label { overflow-wrap: break-word; }
+  .mockup, .preview-tool, .card { max-width: 100%; }
+  .preview-inputs { flex-wrap: wrap; }
+  .preview-inputs input, .preview-inputs select { flex: 1 1 140px; min-width: 0; }
 }
