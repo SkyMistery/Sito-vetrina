@@ -392,3 +392,11 @@ html.dark .hero-glow { background: radial-gradient(circle, rgba(229,118,77,.22),
 @media (max-width: 900px) {
   .nav-links .nav-switch { margin: 10px 0 2px; }
 }
+
+/* Fix overflow orizzontale su mobile (hero / simulatore) */
+html { overflow-x: clip; }               /* blocca scroll orizzontale senza rompere lo sticky */
+@media (max-width: 900px) {
+  .mockup { transform: none; }           /* la rotazione sforava a sinistra su schermi piccoli */
+  .hero-glow { display: none; }          /* alone 520px inutile su mobile (effetto solo desktop) */
+  .hero { padding: 64px 0 56px; }
+}
